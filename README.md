@@ -1,173 +1,110 @@
 🛰 Sentinel — Autonomous Crisis Operations AI Agent
 
-Sentinel is a real-time humanitarian crisis response simulation platform that combines deterministic risk modeling with AI-generated operational command directives.
+✨ A real-time autonomous simulation platform that transforms crisis data into structured, actionable emergency directives using deterministic risk modeling and AI-powered strategic reasoning.
 
-The system continuously evaluates crisis zones, allocates constrained resources, forecasts cascading impacts, and generates structured emergency action plans using an LLM.
+Repository: https://github.com/manuwills11-png/sentinel-crisis-ops-agent
 
-🚨 Problem
 
-In high-risk humanitarian crises (natural disasters, floods, earthquakes, conflict zones), response coordination suffers from:
 
-Data fragmentation
+📌 Overview
 
-Poor prioritization
+Sentinel is a crisis response simulation system built for scenarios such as hurricanes, floods, earthquakes, wildfires, and conflict zones.
 
-Resource misallocation
+It continuously:
 
-Lack of structured operational directives
+Verifies multi-source zone data
 
-Most dashboards visualize data — but do not operationalize it.
+Computes deterministic priority scores
 
-Sentinel transforms crisis data into executable command structures.
+Allocates limited resources
 
-🧠 Solution
+Simulates cascading impacts
 
-Sentinel separates decision intelligence into two layers:
+Forecasts near-term risk trajectories
+
+Generates structured emergency command plans via AI
+
+Unlike traditional dashboards that only visualize data, Sentinel operationalizes it.
+
+
+
+🧠 Core Idea
+
+Sentinel separates decision intelligence into two distinct layers:
+
+
 
 1️⃣ Deterministic Risk Engine
 
-Responsible for:
+Handles:
 
-Zone verification scoring
+Zone scoring
 
-Priority computation
+Threat classification
 
-Threat labeling
+Confidence verification
 
-Resource allocation optimization
+Resource allocation
 
 Cascade modeling
 
 6-hour forecasting
 
+
+
 2️⃣ AI Strategic Reasoning Layer
 
-Responsible for:
+Handles:
 
-Translating risk scores into structured command plans
+Translating risk into structured command plans
 
-Generating operational directives
+Generating evacuation directives
 
-Producing evacuation orders
+Creating resource deployment instructions
 
 Defining monitoring triggers
-
-Structuring emergency response outputs
 
 The AI does NOT compute risk.
 It interprets structured risk signals.
 
 This ensures:
 
-Explainability
-
 Transparency
+
+Explainability
 
 Operational control
 
-⚙️ System Architecture
-Backend (FastAPI)
+🧩 System Architecture
+🔹 Backend — FastAPI
 
-Continuous autonomous agent loop
+
+
+Autonomous agent loop
 
 Multi-zone scoring engine
 
 Resource pool optimization
 
-Cascade effect simulation
 
-Forecast generation
+
+Cascade simulation
+
+
+
+Forecast trend generation
 
 Structured AI command generation (Gemma via Gemini API)
 
-Core Loop:
+
+
+Core Cycle:
 
 Verify → Score → Rank → Allocate → Forecast → Generate Strategy → Alert
 
-Frontend (React + Vite)
 
-Real-time crisis map (Leaflet)
 
-Dynamic zone ranking sidebar
-
-Forecast trend visualizations (Recharts)
-
-What-if simulation controls
-
-Structured AI command rendering
-
-Autonomous cycle indicator
-
-Resource allocation dashboard
-
-🔥 Core Features
-
-Real-time zone prioritization
-
-Threat classification (Low / Moderate / High / Critical)
-
-Confidence scoring system
-
-Resource allocation tracking
-
-Cascade propagation modeling
-
-Forecast trend simulation
-
-AI-generated structured operational directives
-
-Simulation override controls
-
-Continuous autonomous agent cycle
-
-Non-blocking AI reasoning engine
-
-📊 Strategic Command Format
-
-The AI produces structured outputs in this format:
-
-[PRIORITY COMMANDS]
-
-Establish Incident Command Post.
-
-Deploy 4 medical units via Route 7.
-
-Initiate evacuation within 3km flood radius.
-
-[RESOURCE DIRECTIVES]
-
-Allocate remaining boats to waterfront extraction.
-
-Reserve helicopter for medevac standby.
-
-[EVACUATION & CIVIL CONTROL]
-
-Redirect civilians to Eastbrook Shelter A.
-
-Activate traffic redirection protocol.
-
-[RISK MONITORING]
-
-Escalate if severity exceeds 9.0.
-
-Monitor hospital capacity under 40%.
-
-This makes the output actionable for rescue personnel.
-
-🧪 What-If Simulation
-
-Operators can dynamically adjust:
-
-Severity boost
-
-Rainfall increase
-
-Conflict escalation
-
-The system recalculates forecast trajectories and resource strain in real time.
-
-🏗 Tech Stack
-Backend
+Tech Stack:
 
 Python
 
@@ -179,26 +116,84 @@ Uvicorn
 
 Gemini API (Gemma model)
 
-Frontend
 
-React (Vite)
+
+🔹 Frontend — React + Vite
+
+Real-time crisis map (Leaflet)
+
+Dynamic zone ranking sidebar
+
+Forecast trend visualization (Recharts)
+
+What-if simulation controls
+
+Structured AI strategy renderer
+
+Autonomous cycle indicator
+
+Resource dashboard & alerts panel
+
+
+
+Tech Stack:
+
+React
+
+Vite
 
 Leaflet
 
 Recharts
 
-IBM Plex Mono + Syne Typography
+Custom glass UI system
 
-Glass UI design system
 
-🚀 Local Setup
-Clone Repository
 
-git clone https://github.com/YOUR_USERNAME/sentinel-crisis-ops-agent.git
+🔥 Example AI Output
+
+The AI produces structured operational directives like this:
+
+[PRIORITY COMMANDS]
+
+Establish Incident Command Post at Central Valley.
+
+Deploy 3 rapid response medical units east of zone boundary.
+
+Initiate evacuation within 4km flood radius via Route 12.
+
+[RESOURCE DIRECTIVES]
+
+Allocate two mobile supply trucks to staging area B.
+
+Reserve helicopter for critical medevac standby.
+
+[EVACUATION & CIVIL CONTROL]
+
+Redirect civilians to Westside Shelter C.
+
+Activate emergency traffic diversion protocol.
+
+[RISK MONITORING]
+
+Escalate if severity exceeds 9.5.
+
+Monitor hospital capacity below 40%.
+
+This structure ensures rescue teams can follow directives immediately without interpretation.
+
+
+
+⚙️ Local Setup
+1️⃣ Clone Repository
+
+git clone https://github.com/manuwills11-png/sentinel-crisis-ops-agent.git
 
 cd sentinel-crisis-ops-agent
 
-Backend Setup
+
+
+2️⃣ Backend Setup
 
 cd backend
 python -m venv venv
@@ -213,71 +208,99 @@ Run backend:
 
 uvicorn main:app --reload --port 8000
 
-Backend runs on:
-
+Backend runs at:
 http://localhost:8000
 
-Frontend Setup
+
+
+3️⃣ Frontend Setup
 
 cd frontend
 npm install
 npm run dev
 
-Frontend runs on:
-
+Frontend runs at:
 http://localhost:5173
 
-🔐 Environment Variables
+🧪 What-If Simulation
 
-Backend requires:
+Operators can dynamically adjust:
 
-GEMINI_API_KEY
+Severity boost
 
-Never commit .env files.
+Rainfall increase
 
-🧠 Design Philosophy
+Conflict escalation
 
-Sentinel is built around:
+The system recalculates forecast projections and resource strain in real time.
 
-Deterministic control systems
 
-AI-assisted reasoning
 
-Structured operational output
+📊 Key Features
 
-Crisis transparency
+Real-time zone priority ranking
 
-Explainable intelligence
+Threat classification (Low / Moderate / High / Critical)
 
-It avoids black-box decision making by isolating AI reasoning from risk scoring.
+Confidence scoring system
 
-📈 Future Improvements
+Resource allocation tracking
+
+Cascade propagation modeling
+
+Forecast trend simulation
+
+Structured AI emergency directives
+
+Autonomous cycle engine
+
+Interactive crisis map
+
+Simulation parameter controls
+
+
+
+🔐 Security
+
+.env files are excluded via .gitignore
+
+API keys are never committed
+
+Anyone cloning must use their own API key
+
+
+
+🚀 Future Improvements
 
 Multi-agent coordination
 
 Real-time sensor ingestion
 
-Satellite data streaming
+Satellite data integration
 
-Reinforcement learning resource allocation
-
-Multi-model strategic reasoning
+Reinforcement learning resource optimization
 
 GIS evacuation corridor overlays
 
-Live deployment dashboard
+Multi-model AI validation
+
+
 
 🛡 Disclaimer
 
 This project is a simulation and research prototype.
-Not intended for live emergency deployment.
+It is not intended for real-world emergency deployment.
+
+
 
 👨‍💻 Author
 
 Martin Wills
-B.Tech Computer Science
-AI Systems & Autonomous Agents
+AI Systems Engineer
+GitHub: https://github.com/manuwills11-png
 
-⭐ License
+
+
+📜 License
 
 MIT License
