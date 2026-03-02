@@ -1,33 +1,31 @@
 export default function LogsTab({ logs }) {
   return (
     <div style={{
-      background: 'rgba(12, 24, 40, 0.7)',
-      border: '1px solid rgba(56, 120, 200, 0.12)',
-      borderRadius: '8px',
-      padding: '14px',
+      background:'rgba(0,180,255,0.03)', border:'1px solid rgba(0,180,255,0.1)',
+      borderRadius:'12px', padding:'16px'
     }}>
-      <div style={{ fontSize: '8px', color: '#2a4060', letterSpacing: '0.14em', marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '7px' }}>
-        <span style={{ color: '#38bdf8' }}>▣</span>
-        AUTONOMOUS DECISION LOG — {logs?.length || 0} ENTRIES
+      <div style={{ display:'flex', alignItems:'center', gap:'8px', marginBottom:'4px' }}>
+        <div style={{ width:'3px', height:'14px', background:'#00d4ff', borderRadius:'2px' }} />
+        <span style={{ fontFamily:'IBM Plex Mono,monospace', fontSize:'8px', color:'#2a4a6a', letterSpacing:'0.18em' }}>
+          AUTONOMOUS DECISION LOG — {logs?.length || 0} ENTRIES
+        </span>
       </div>
-      <div style={{ fontSize: '8px', color: '#1e3550', marginBottom: '10px' }}>
-        Every allocation decision logged: timestamp · zone · priority · confidence · threat · dispatched resources
+      <div style={{ fontFamily:'IBM Plex Mono,monospace', fontSize:'7.5px', color:'#1a3a54', marginBottom:'12px' }}>
+        Every allocation decision: timestamp · zone · priority · confidence · dispatched
       </div>
-      <div style={{ overflowY: 'auto', maxHeight: 'calc(100vh - 280px)' }}>
+      <div style={{ overflowY:'auto', maxHeight:'calc(100vh - 320px)' }}>
         {(logs || []).map((line, i) => (
           <div key={i} style={{
-            fontSize: '8.5px',
-            color: i === 0 ? '#3d7a60' : '#1e3550',
-            borderBottom: '1px solid rgba(56, 120, 200, 0.05)',
-            padding: '4px 0',
-            fontFamily: 'IBM Plex Mono, monospace',
-            whiteSpace: 'nowrap',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
+            fontFamily:'IBM Plex Mono,monospace', fontSize:'8.5px',
+            color: i === 0 ? '#00d4ff' : '#1e3a58',
+            borderBottom:'1px solid rgba(0,180,255,0.06)',
+            padding:'5px 0',
+            whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis'
           }}>{line}</div>
         ))}
-        {(!logs || logs.length === 0) && (
-          <div style={{ fontSize: '9px', color: '#1e3550', textAlign: 'center', padding: '30px' }}>
+        {!logs?.length && (
+          <div style={{ fontFamily:'IBM Plex Mono,monospace', fontSize:'9px',
+            color:'#1a3a54', textAlign:'center', padding:'40px' }}>
             Awaiting first agent cycle...
           </div>
         )}

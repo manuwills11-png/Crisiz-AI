@@ -1,83 +1,77 @@
+const TC = { CRITICAL:'#ff3a5c', HIGH:'#ff8c00', MODERATE:'#f0c040', LOW:'#00ff9d' };
+
 export default function AlertsTab({ alerts }) {
   return (
     <div>
       <div style={{
-        background: 'rgba(12, 24, 40, 0.7)',
-        border: '1px solid rgba(56, 120, 200, 0.12)',
-        borderRadius: '8px',
-        padding: '12px 14px',
-        marginBottom: '12px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
+        background:'rgba(0,180,255,0.05)', border:'1px solid rgba(0,180,255,0.15)',
+        borderRadius:'12px', padding:'14px 18px', marginBottom:'14px',
+        display:'flex', alignItems:'center', justifyContent:'space-between'
       }}>
         <div>
-          <div style={{ fontSize: '8px', color: '#ef4444', letterSpacing: '0.14em', marginBottom: '3px', display: 'flex', alignItems: 'center', gap: '7px' }}>
-            <span style={{ animation: 'blink 1.2s infinite', display: 'inline-block' }}>◉</span>
+          <div style={{ fontFamily:'IBM Plex Mono,monospace', fontSize:'8px', color:'#ff3a5c',
+            letterSpacing:'0.16em', marginBottom:'4px', display:'flex', alignItems:'center', gap:'7px' }}>
+            <span style={{ animation:'glow-line 1.5s infinite', display:'inline-block' }}>◉</span>
             AUTOMATED ALERT SYSTEM
           </div>
-          <div style={{ fontSize: '8px', color: '#2a4060' }}>
-            Fires when: Priority ≥ 45% AND Confidence ≥ 55% AND zone verified
+          <div style={{ fontFamily:'IBM Plex Mono,monospace', fontSize:'7.5px', color:'#2a4a6a' }}>
+            Fires when: Priority ≥ 45% and Confidence ≥ 55% and zone verified
           </div>
         </div>
-        <div style={{
-          fontFamily: 'Syne, sans-serif', fontWeight: 800, fontSize: '24px',
-          color: alerts?.length > 0 ? '#ef4444' : '#22c55e',
-          animation: alerts?.length > 0 ? 'blink 2s infinite' : 'none',
-        }}>
+        <div style={{ fontFamily:'IBM Plex Mono,monospace', fontWeight:700, fontSize:'32px',
+          color: alerts?.length > 0 ? '#ff3a5c' : '#00ff9d' }}>
           {alerts?.length || 0}
         </div>
       </div>
 
-      {(!alerts || alerts.length === 0) && (
-        <div style={{
-          padding: '40px', textAlign: 'center',
-          border: '1px dashed rgba(56,120,200,0.15)',
-          borderRadius: '8px',
-          fontSize: '10px', color: '#2a4060',
-        }}>
-          ◉ NO ALERTS ACTIVE — ALL ZONES BELOW THRESHOLD
+      {!alerts?.length && (
+        <div style={{ padding:'48px', textAlign:'center',
+          border:'1px dashed rgba(0,180,255,0.15)', borderRadius:'12px',
+          fontFamily:'IBM Plex Mono,monospace', fontSize:'9px', color:'#1a3a54' }}>
+          ◉ NO ALERTS ACTIVE
         </div>
       )}
 
-      {(alerts || []).map(a => (
-        <div key={a.alert_id} style={{
-          background: `${a.threat_color}0d`,
-          border: `1px solid ${a.threat_color}35`,
-          borderRadius: '8px',
-          padding: '12px 14px',
-          marginBottom: '10px',
-          animation: 'fadeSlideUp 0.35s ease',
-        }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-            <div style={{ fontFamily: 'Syne, sans-serif', fontWeight: 700, fontSize: '13px', color: a.threat_color }}>
-              {a.zone}
+      {(alerts || []).map(a => {
+        const tc = a.threat_color || TC[a.urgency_level] || '#ff8c00';
+        return (
+          <div key={a.alert_id} style={{
+            background: tc + '0d', border: '1px solid ' + tc + '35',
+            borderRadius:'12px', padding:'16px 18px', marginBottom:'10px'
+          }}>
+            <div style={{ display:'flex', justifyContent:'space-between', marginBottom:'6px' }}>
+              <div style={{ fontFamily:'IBM Plex Mono,monospace', fontWeight:700, fontSize:'15px', color:tc }}>
+                {a.zone}
+              </div>
+              <div style={{ fontFamily:'IBM Plex Mono,monospace', fontSize:'8px', color:'#1a3a54' }}>
+                {new Date(a.timestamp).toLocaleTimeString()}
+              </div>
             </div>
-            <div style={{ fontSize: '8px', color: '#2a4060' }}>{new Date(a.timestamp).toLocaleTimeString()}</div>
-          </div>
-          <div style={{ fontSize: '10px', color: a.threat_color, letterSpacing: '0.06em', margin: '5px 0' }}>
-            ⚠ {a.recommended_action}
-          </div>
-          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', fontSize: '8px', color: '#3d5a78', marginBottom: '6px' }}>
-            <span>HAZARD: {a.hazard}</span>
-            <span>THREAT: {a.urgency_level}</span>
-            <span>CONF: {a.confidence_level}%</span>
-            <span>POP: {(a.population || 0).toLocaleString()}</span>
-          </div>
-          {a.resources_dispatched?.length > 0 && (
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', marginTop: '4px' }}>
-              {a.resources_dispatched.map(r => (
-                <span key={r} style={{
-                  fontSize: '8px', padding: '2px 7px',
-                  background: 'rgba(56,189,248,0.08)',
-                  border: '1px solid rgba(56,189,248,0.2)',
-                  borderRadius: '3px', color: '#38bdf8',
-                }}>{r}</span>
-              ))}
+            <div style={{ fontFamily:'IBM Plex Mono,monospace', fontSize:'10px', color:tc, margin:'6px 0 10px' }}>
+              ⚠ {a.recommended_action}
             </div>
-          )}
-        </div>
-      ))}
+            <div style={{ display:'flex', gap:'14px', flexWrap:'wrap',
+              fontFamily:'IBM Plex Mono,monospace', fontSize:'8px', color:'#2a4a6a', marginBottom:'10px' }}>
+              <span>HAZARD: {a.hazard}</span>
+              <span>THREAT: {a.urgency_level}</span>
+              <span>CONF: {a.confidence_level}%</span>
+              <span>POP: {(a.population || 0).toLocaleString()}</span>
+            </div>
+            {a.resources_dispatched?.length > 0 && (
+              <div style={{ display:'flex', flexWrap:'wrap', gap:'6px' }}>
+                {a.resources_dispatched.map(r => (
+                  <span key={r} style={{
+                    fontFamily:'IBM Plex Mono,monospace', fontSize:'8px',
+                    padding:'3px 10px',
+                    background:'rgba(0,180,255,0.07)', border:'1px solid rgba(0,180,255,0.2)',
+                    borderRadius:'5px', color:'#00d4ff'
+                  }}>{r}</span>
+                ))}
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }

@@ -50,7 +50,7 @@ export default function Dashboard({ zones, shelters, resources, alerts }) {
     : 0;
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '12px' }}>
       {/* Hazard Summary */}
       <GlassCard>
         <CardHeader icon="◈" title="ACTIVE HAZARD SUMMARY" />
