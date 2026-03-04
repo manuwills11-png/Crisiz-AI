@@ -26,9 +26,12 @@ function KPI({ value, label, warn, crit }) {
   );
 }
 
+const SOURCE_ICONS = { satellite: '🛰', agency: '📡', sensor: '⚡', citizen: '👥', medical: '🏥', ground_sensor: '📍' };
+
 function ZoneRow({ zone, selected, onClick }) {
   const tc = THREAT_COLORS[zone.threat_label] || '#22c55e';
   const isCrit = zone.threat_label === 'CRITICAL';
+  const hasLiveData = zone._liveData;
 
   return (
     <div
@@ -38,7 +41,7 @@ function ZoneRow({ zone, selected, onClick }) {
         borderBottom: '1px solid rgba(56, 120, 200, 0.07)',
         cursor: 'pointer',
         background: selected ? 'rgba(56, 189, 248, 0.06)' : 'transparent',
-        borderLeft: selected ? `2px solid ${tc}` : '2px solid transparent',
+        borderLeft: selected ? `2px solid ${tc}` : `2px solid ${hasLiveData ? 'rgba(0,255,157,0.4)' : 'transparent'}`,
         transition: 'all 0.15s',
         position: 'relative',
       }}
@@ -57,6 +60,11 @@ function ZoneRow({ zone, selected, onClick }) {
       <div style={{ display: 'flex', alignItems: 'center', gap: '7px', fontSize: '10px', color: '#8eacc8' }}>
         <span>{HAZARD_ICONS[zone.hazard_type] || '◉'}</span>
         <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>{zone.name}</span>
+        {hasLiveData && (
+          <span style={{ fontSize: '7px', color: '#00ff9d', background: 'rgba(0,255,157,0.1)', border: '1px solid rgba(0,255,157,0.3)', borderRadius: '3px', padding: '1px 4px', flexShrink: 0, letterSpacing: '0.08em' }}>
+            {SOURCE_ICONS[zone.source_type] || '◉'} LIVE
+          </span>
+        )}
         <span style={{
           fontSize: '7px', fontWeight: 600, letterSpacing: '0.09em',
           padding: '1px 5px', borderRadius: '3px',
